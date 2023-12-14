@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/stylelogin.css">
+	<link rel="shortcut icon" href="img/pet.png">
+	<title>APLICATIVO</title>
+</head>
+<body>
+	<div class="align">
+		<img class="logo" src="img/pet.png">
+		<div class="card">
+			<div class="head">
+				<div></div>
+				<a id="login"  href="indexlogin.html">Iniciar sesion</a>
+				<a id="register" class="selected" href="indexreg.html">Registrarse</a>
+				<div></div>
+			</div>
+			<div class="tabs">
+				<!--Metodo post no permite que la información sea vista en barra de navegacion-->
+				<form action="agregar_reg.php" method="post">
+					<div class="inputs">
+						<div class="input">
+							<input placeholder="Nombre" type="text" name="Nombre" required>
+							<img src="img/user.png">
+						</div>
+						<div class="input">
+							<input placeholder="Apellido" type="text" name="Apellido" required>
+							<img src="img/user.png">
+						</div>
+						<div class="input">
+							<select name="Tipo_Documento" required>
+								<option value="C.C">C.C</option>
+								<option value="T.I">T.I</option>
+								<option value="C.E">Carnet de Extranjería</option>
+								<option value="pasaporte">Pasaporte</option>
+							</select>
+						</div>
+						<div class="input">
+							<input placeholder="Documento" type="text" name="Documento" required>
+							<img src="img/documento.png">
+						</div>
+						<div class="input">
+							<input placeholder="Teléfono" type="text" name="Telefono" required>
+							<img src="img/telefono-movil.png">
+						</div>
+						<div class="input">
+							<input placeholder="Dirección" type="text" name="Direccion" required>
+							<img src="img/hogar.png">
+						</div>
+						<div class="input">
+							<input placeholder="Cant. Mascotas" type="text" name="No_Mascotas" required>
+							<img src="img/mascotas.png">
+						</div>
+						<div class="input">
+							<input placeholder="Correo Electronico" type="text" name="Correo_Electronico" required>
+							<img src="img/mail.svg">
+						</div>
+						<div class="input">
+							<input placeholder="Nombre de Usuario" type="text" name="Usuario" required>
+							<img src="img/user.png">
+						</div>
+						<div class="input">
+							<input placeholder="Contraseña" type="password" name="Contrasena" required>
+							<img src="img/pass.png">
+						</div>
+						<button type="submit">Registrarse</button>
+						<br>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
