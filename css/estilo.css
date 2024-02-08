@@ -146,13 +146,13 @@ footer {
     transition: background-color 0.3s;
 }
 
+.servicio:hover {
+    background-color: #0056b3;
+}
+
 .servicio a {
     color: #fff;
     text-decoration: none;
-}
-
-.servicio:hover {
-    background-color: #0056b3;
 }
 
 /* Estilos para la sección de citas */

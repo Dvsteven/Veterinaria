@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +17,7 @@
             <li class="btn" onclick="navigateTo('index.html')">Inicio</li>
             <li class="btn" onclick="navigateTo('./mascotas/mascotas_index.html')">Mascotas</li>
             <li class="btn" onclick="navigateTo('./servicios/servicios.html')">Servicios</li>
-            <li class="btn" onclick="navigateTo('./perfil/dashboard.html')">Perfil</li> 
+            <li class="btn" onclick="navigateTo('./perfil/dashboard.php')">Perfil</li> 
             <li class="btn" onclick="navigateTo('./login/indexlogin.html')">Ingresar</li>
             <li class="btn" onclick="navigateTo('./login/indexreg.html')">Registro</li>
           </ul>
@@ -38,23 +41,23 @@
           <p>Ofrecemos una amplia gama de servicios para cuidar de la salud y el bienestar de tus mascotas:</p>
           
           <div class="servicio">
-              <a href="./servicios/consultaMedica.html">Consulta Medica</a>
+          <a href="./servicios/servicios.html#consultaMedica">Consulta Medica</a>
           </div>
   
           <div class="servicio">
-            <a href="./servicios/vacunas.html">Vacunas</a>
+          <a href="./servicios/servicios.html#vacunas">Vacunas</a>
           </div>
   
           <div class="servicio">
-            <a href="./servicios/cirugias.html">Cirugías</a>
+            <a href="./servicios/servicios.html">Cirugías</a>
           </div>
   
           <div class="servicio">
-            <a href="./servicios/examenes.html">Exámenes de Laboratorio</a>
+          <a href="./servicios/servicios.html#examenesLaboratorio">Exámenes de Laboratorio</a>
           </div>
   
           <div class="servicio">
-            <a href="./servicios/guarderia.html">Guarderia
+          <a href="./servicios/servicios.html#guarderia">Guardería</a>
             </a>
           </div>
       </section>

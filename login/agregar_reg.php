@@ -14,8 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Error en la conexión a la base de datos: " . $conn->connect_error);
     }
 }
-
-    
     // Tomando datos del formulario para luego ser enviados a la base de datos
     $nombre = $_POST["Nombre"];
     $apellido = $_POST["Apellido"];
@@ -34,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->query($sql) === TRUE) {
             echo "<script type=\"text/javascript\">alert(\"Registro Guardado Exitosamente!\");</script>";
             //Permite que se envíe la información y regrese al formulario de Ingreso de Clientes
-            echo "<meta http-equiv='refresh' content='0; url=../login/indexlogin.html'>";
+            echo "<meta http-equiv='refresh' content='0; url=../login/indexlogin.php'>";
             // content es el tiempo de espera
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
