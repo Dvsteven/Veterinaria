@@ -1,5 +1,5 @@
 <?php
-session_start();
+  session_start();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +19,7 @@ session_start();
             <li class="btn" onclick="navigateTo('./servicios/servicios.html')">Servicios</li>
             <li class="btn" onclick="navigateTo('./profile/index.html')">Perfil</li> 
             <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Ingresar</li>
-            <li class="btn" onclick="navigateTo('./login/indexreg.html')">Registro</li>
+            <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Registro</li>
           </ul>
       </nav>
   </header>

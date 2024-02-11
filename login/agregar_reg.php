@@ -17,17 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Tomando datos del formulario para luego ser enviados a la base de datos
     $nombre = $_POST["Nombre"];
     $apellido = $_POST["Apellido"];
-    $tipoDocumento = $_POST["Tipo_Documento"];
-    $documento = $_POST["Documento"];
+    $correoElectronico = $_POST["correo_electronico"];
+    $contrasena = $_POST["Contrasena"];
     $telefono = $_POST["Telefono"];
     $direccion = $_POST["Direccion"];
-    $noMascotas = $_POST["No_Mascotas"];
-    $correoElectronico = $_POST["Correo_Electronico"];
-    $usuario = $_POST["Usuario"];
-    $contrasena = $_POST["Contrasena"];
+    $rol = $_POST["rol"];
+    $especialidad = $_POST["especialidad"];
 
-    $sql = "INSERT INTO usuarios (nombre, apellido, tipo_documento, documento, telefono, direccion, no_mascotas, correo_electronico, usuario, contrasena) 
-        VALUES ('$nombre', '$apellido', '$tipoDocumento', '$documento', '$telefono', '$direccion', '$noMascotas', '$correoElectronico', '$usuario', '$contrasena')";
+    $sql = "INSERT INTO personal (nombre, apellido, email, password, telefono, direccion, rol, especialidad) 
+        VALUES ('$nombre', '$apellido', '$correoElectronico', '$contrasena', '$telefono', '$direccion', '$rol','$especialidad')";
         
         if ($conn->query($sql) === TRUE) {
             echo "<script type=\"text/javascript\">alert(\"Registro Guardado Exitosamente!\");</script>";

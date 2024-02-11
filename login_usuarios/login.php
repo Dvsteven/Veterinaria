@@ -119,9 +119,9 @@
     <script>
         document.getElementById('switch-label').addEventListener('change', function() {
             if (this.checked) {
-                window.location.href = '../login/indexlogin.html?switch=on'; // Redirigir a la página 2 con el switch activado
+                window.location.href = '../login/indexlogin.php?switch=on'; // Redirigir a la página 2 con el switch activado
             } else {
-                window.location.href = './login/indexlogin.html'; // Redirigir a la página 2 con el switch desactivado
+                window.location.href = './login/indexlogin.php'; // Redirigir a la página 2 con el switch desactivado
             }
         });
     </script>
