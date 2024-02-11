@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/style.css">
-    <title>FORMULARIO DE REGISTRO E INICIO SESIÓN</title>
+    <title>Formulario de Inicio de sesion y Registro </title>
 </head>
 <body>
 
@@ -118,13 +118,10 @@
     </div>
     <script>
         document.getElementById('switch-label').addEventListener('change', function() {
-            // Verificar si el switch está activado
             if (this.checked) {
-                // Agregar un pequeño retraso antes de redirigir
-                setTimeout(function() {
-                    // Redirigir a la página deseada cuando el switch esté activado
-                    window.location.href = '../login/indexlogin.html';
-                }, 500); // Tiempo en milisegundos (0.5 segundos en este caso)
+                window.location.href = '../login/indexlogin.html?switch=on'; // Redirigir a la página 2 con el switch activado
+            } else {
+                window.location.href = './login/indexlogin.html'; // Redirigir a la página 2 con el switch desactivado
             }
         });
     </script>

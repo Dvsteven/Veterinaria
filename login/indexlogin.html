@@ -45,14 +45,24 @@
         <label for="switch-label" class="switch-button__label"></label>
     </div>
     <script>
+        // Verificar el parámetro 'switch' en la URL al cargar la página
+        window.addEventListener('DOMContentLoaded', function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var switchState = urlParams.get('switch');
+
+            if (switchState === 'on') {
+                // Si el switch está activado, marcar el checkbox y cambiar el color
+                document.getElementById('switch-label').checked = true;
+                document.querySelector('.switch-button__label').style.backgroundColor = '#3ed145'; // Cambiar a verde
+            }
+        });
+
+        // Manejar el cambio de estado del switch
         document.getElementById('switch-label').addEventListener('change', function() {
-            // Verificar si el switch está activado
             if (this.checked) {
-                // Agregar un pequeño retraso antes de redirigir
-                setTimeout(function() {
-                    // Redirigir a la página deseada cuando el switch esté activado
-                    window.location.href = '../login_usuarios/login.php';
-                }, 500); // Tiempo en milisegundos (0.5 segundos en este caso)
+                window.location.href = '../login_usuarios/login.php?switch=on'; // Redirigir a la página 1 con el switch activado
+            } else {
+                window.location.href = '../login_usuarios/login.php'; // Redirigir a la página 1 con el switch desactivado
             }
         });
     </script>
