@@ -184,3 +184,46 @@ form {
 	font-size: 21px;
 	cursor: pointer;
 }
+
+/*Estilo para el switch del login*/
+:root {
+    --color-green: #3ed145;
+    --color-red: #f33b1a;
+    --color-button: #fdffff;
+    --color-black: #000;
+}
+.switch-button {
+	position: fixed;
+	bottom: 20px; /* Ajusta la posición vertical */
+	right: 20px; /* Ajusta la posición horizontal */
+	display: inline-block;
+}
+.switch-button .switch-button__checkbox {
+    display: none;
+}
+.switch-button .switch-button__label {
+    background-color: var(--color-red);
+    width: 5rem;
+    height: 3rem;
+    border-radius: 3rem;
+    display: inline-block;
+    position: relative;
+}
+.switch-button .switch-button__label:before {
+    transition: .2s;
+    display: block;
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--color-button);
+    content: '';
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 0px 1px var(--color-black);
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label {
+    background-color: var(--color-green);
+}
+.switch-button .switch-button__checkbox:checked + .switch-button__label:before {
+    transform: translateX(2rem);
+}
+/*Fin estilo switch*/

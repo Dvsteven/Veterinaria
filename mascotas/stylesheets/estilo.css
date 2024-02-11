@@ -271,3 +271,32 @@ button:hover {
 #scrollToTopBtn:hover {
     background-color: #45a049;
 }
+
+/* Estilos para el botón "Ir a tienda" */
+.go-to-store-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+    background-color: #4CAF50; /* Puedes cambiar el color de fondo según tu preferencia */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilos para la sección del carrito */
+.cart-section {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#cart-items {
+    list-style: none;
+    padding: 0;
+}
+
+#cart-items li {
+    margin-bottom: 5px;
+}

@@ -3,26 +3,62 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    height: 100vh; /* Ajusta la altura del cuerpo al 100% de la altura de la ventana */
 }
 
 .dashboard-container {
     display: flex;
+    height: 100%; /* La columna izquierda ocupará toda la altura del contenedor */
+
+}
+.dashboard-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.dashboard-card h2 {
+    color: #333;
+}
+
+.dashboard-card p {
+    margin-bottom: 10px;
+}
+
+.dashboard-card a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #00ffdd;
+    font-weight: bold;
+}
+
+.dashboard-card img {
+    width: 30px;
+    margin-right: 10px;
 }
 
 .sidebar {
-    width: 250px;
+    width: 200px;
     background-color: #333;
     padding: 20px;
     color: white;
+    height: 100%; /* La columna izquierda ocupa toda la altura */
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar h2 {
     color: #00ffdd;
+    text-align: center;
 }
 
 .sidebar ul {
     list-style: none;
     padding: 0;
+    text-align: center;
 }
 
 .sidebar li {

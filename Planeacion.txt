@@ -1,0 +1,34 @@
+Pendientes:
+
+* Buscar forma de introducir admin y roles *
+* Cambiar la forma de añadir productos a carrito
+* Cambiar boton de ir a tienda
+* Formularios de servicios
+* 
+-------------------------------------------------------
+Roles:
+Superadmin
+Medico
+Usuario
+
+-------------------------------------------------------
+Sistemico:
+Usuario: vista general del sitio
+Superadmin: panel de configuraciones y tablas
+Medico: Panel medico, visualizacion etc..
+-------------------------------------------------------
+Login:
+(Pasos a partir del login)
+Manejar la sesion almacenar los datos de la base desde el login del personal.
+Admin:
+--Ir directamente al panel--En el panel estaran--
+
+
+
+Mañana!!
+Trabajar sesion
+Trabajar en los paneles administrativos
+Trabajar en el perfil
+Trabajar en los servicios
+Por ultimo los diseños y lo bonito
+Y hacer pruebas

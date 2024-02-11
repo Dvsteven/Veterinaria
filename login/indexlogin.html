@@ -38,5 +38,23 @@
 			</div>
 		</div>
 	</div>
+	<div class="switch-button">
+        <!-- Checkbox -->
+        <input type="checkbox" name="switch-button" id="switch-label" class="switch-button__checkbox">
+        <!-- Botón -->
+        <label for="switch-label" class="switch-button__label"></label>
+    </div>
+    <script>
+        document.getElementById('switch-label').addEventListener('change', function() {
+            // Verificar si el switch está activado
+            if (this.checked) {
+                // Agregar un pequeño retraso antes de redirigir
+                setTimeout(function() {
+                    // Redirigir a la página deseada cuando el switch esté activado
+                    window.location.href = '../login_usuarios/login.php';
+                }, 500); // Tiempo en milisegundos (0.5 segundos en este caso)
+            }
+        });
+    </script>
 </body>
 </html>
