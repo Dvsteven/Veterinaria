@@ -1,0 +1,56 @@
+Pendientes:
+
+* Buscar forma de introducir admin y roles * (Medio hecho J)
+* Cambiar la forma de añadir productos a carrito (Hecho J)
+* Cambiar boton de ir a tienda (Hecho J)
+* Formularios de servicios (Hecho J.E)
+* 
+-------------------------------------------------------
+(Hecho j)
+Roles:
+Superadmin
+Medico
+Usuario
+
+-------------------------------------------------------
+(Hecho J)
+Sistemico:
+Usuario: vista general del sitio
+Superadmin: panel de configuraciones y tablas
+Medico: Panel medico, visualizacion etc..
+-------------------------------------------------------
+(Hecho J)
+Login:
+(Pasos a partir del login)
+Manejar la sesion almacenar los datos de la base desde el login del personal.
+Admin:
+--Ir directamente al panel--En el panel estaran-- (Hecho J)
+
+
+
+Mañana!!
+Trabajar sesion (Hecho J)
+Trabajar en los paneles administrativos (Medio Hecho J)
+Trabajar en el perfil (En proceso J)
+Trabajar en los servicios (Medio Hecho J.E)
+Por ultimo los diseños y lo bonito
+Y hacer pruebas
+--------------------------------------------------------
+Roles para base de datos de personal:
+Admin - Medico
+
+
+
+Login de personal (admin y med)
+codigo descartado:
+            // Imprime la alerta con el nombre de la persona
+            echo "<script type=\"text/javascript\">alert(\"Inicio de sesión exitoso! Bienvenido, $nombre $apellido\");</script>";
+            // Redirige a la página principal
+            echo "<meta http-equiv='refresh' content='0; url=../panel/index.php'>";
+        } else {
+            // Si las credenciales son incorrectas, muestra un mensaje de error
+            echo "<script>alert('Email o contraseña incorrectos.');</script>";
+            echo "<script>window.location.href = 'indexlogin.php';</script>";
+        }
+
+        $conn->close(); 

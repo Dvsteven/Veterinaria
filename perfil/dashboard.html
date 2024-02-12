@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet/style.css">
+    <link rel="shortcut icon" href="../login/img/pet.png">
+    <title>Dashboard</title>
+    <!-- Otras inclusiones según sea necesario -->
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Columna izquierda: Compras, Citas, Mascotas, Historial -->
+        <div class="sidebar">
+            <h2>Mi Perfil</h2>
+            <ul>
+                <li><a href="#compras">Mis Compras</a></li>
+                <li><a href="#citas">Mis Citas</a></li>
+                <li><a href="#mascotas">Mis Mascotas</a></li>
+                <li><a href="#historial">Historial Médico</a></li>
+            </ul>
+        </div>
+        <!-- Contenido principal: Datos personales, Modificar datos -->
+        <div class="main-content">
+            <h1>Bienvenido a tu Dashboard</h1>
+            <!-- Sección de Modificar Datos -->
+            <div id="datosPersonales" class="dashboard-card">
+                <h2>Datos Personales</h2>
+                <p id="nombre">Nombre:</p>
+                <p id="apellido">Apellido:</p>
+                <p id="tipoDocumento">Tipo de Documento:</p>
+                <p id="documento">Documento:</p> 
+                <p id="telefono">Teléfono:</p>
+                <p id="direccion">Direccion:</p>
+                <p id="mascotas">Mascotas:</p>
+                <p id="correoElectronico">Correo Electrónico:</p>
+                <p id="usuario">Usuario:</p>
+                <p id="contrasena">Contraseña:</p>
+                <!-- Icono y enlace para modificar datos -->
+                <a href="pagina_modificacion_datos.html">
+                    <img src="../img/mod-perfil.png" alt="Modificar Datos">
+                    Modificar Datos
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hacer la solicitud al servidor para obtener los datos del usuario
+            fetch('get_user_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    // Actualizar los elementos HTML con los datos del usuario
+                    document.getElementById('nombre').innerText = "Nombre: " + data.nombre;
+                    document.getElementById('apellido').innerText = "Apellido: " + data.apellido;
+                    document.getElementById('tipoDocumento').innerText = "Tipo de Documento: " + data.tipoDocumento;
+                    document.getElementById('documento').innerText = "Documento: " + data.documento;
+                    document.getElementById('telefono').innerText = "Teléfono: " + data.telefono;
+                    document.getElementById('direccion').innerText = "Dirección: " + data.direccion;
+                    document.getElementById('mascotas').innerText = "Mascotas: " + data.mascotas;
+                    document.getElementById('correoElectronico').innerText = "Correo Electrónico: " + data.correoElectronico;
+                    document.getElementById('usuario').innerText = "Usuario: " + data.usuario;
+                    document.getElementById('contrasena').innerText = "Contraseña: " + data.contrasena;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

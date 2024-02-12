@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo de Citas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../login/img/pet.png">
+</head>
+<body>
+    <div class="container">
+        <h2>Solicitar una Cita</h2>
+        <form action="procesar_cita.php" method="post">
+            <label for="nombre">Nombre del Dueño:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="nombrep">Nombre del Peludito:</label>
+            <input type="text" id="nombrep" name="nombrep" required>
+
+            <label for="tipo">Tipo de Mascota:</label>
+            <select id="tipo" name="tipo" required>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+                <option value="Ave">Ave</option>
+                <option value="Roedor">Roedor</option>
+                <option value="Otro">Otro</option>
+            </select>            
+
+            <label for="raza">Raza:</label>
+            <input type="text" id="raza" name="raza" required>
+
+            <label for="contacto">Contacto:</label>
+            <input type="text" id="contacto" name="contacto" required>
+
+            <label for="cita">Tipo de Cita:</label>
+            <select id="cita" name="cita" required>
+                <option value="Primera Vez">Primera Vez</option>
+                <option value="Medicina General">Medico General</option>
+                <option value="Seguimiento">Seguimiento</option>
+                <option value="Procedimiento_g">Procedimiento Quirurgico</option>
+                <option value="Medicamentos">Medicamentos</option>
+            </select>
+
+            <label for="motivo">Motivo:</label>
+            <input type="text" id="motivo" name="motivo" required>
+
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required>
+
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora" name="hora" required>
+
+            <button type="submit">Solicitar Cita</button>
+            <a href="../index.php">Regresar a la pagina principal</a>
+        </form>
+    </div>
+</body>
+</html>
