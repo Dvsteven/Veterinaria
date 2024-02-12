@@ -1,3 +1,4 @@
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php
     session_start();
 
@@ -15,6 +16,11 @@
         // Consulta SQL para verificar el login
         $sql = "SELECT * FROM personal WHERE email='$usuario' AND password='$contrasena'";
         $result = $conn->query($sql);
+?>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>;
+
+<?php
 
         if ($result->num_rows == 1) {
             // Usuario válido, inicia sesión y redirige
@@ -31,14 +37,18 @@
             $_SESSION['apellido'] = $apellido;
             $_SESSION['rol'] = $rol;
 
-            // Imprime la alerta con el nombre de la persona
-            echo "<script type=\"text/javascript\">alert(\"Inicio de sesión exitoso! Bienvenido, $nombre $apellido\");</script>";
-            // Redirige a la página principal
-            echo "<meta http-equiv='refresh' content='0; url=../panel/index.html'>";
+            // Redirige a diferentes paneles según el rol del usuario
+            if ($rol == "Administrador") {
+                echo "<script>swal('Inicio de sesión exitoso!', 'Bienvenido, SuperAdmin $nombre $apellido', 'success').then(() => { window.location.href = '../panel/index.php'; });</script>";
+            } elseif ($rol == "Medico") {
+                echo "<script>swal('Inicio de sesión exitoso!', 'Bienvenido, $nombre $apellido', 'success').then(() => { window.location.href = '../perfil/dashboard.php'; });</script>";
+            } else {
+                // Rol no reconocido, redirige a un error o página de inicio común
+                echo "<script>swal('Error', 'Rol de usuario no reconocido', 'error').then(() => { window.location.href = '../error.php'; });</script>";
+            }
         } else {
             // Si las credenciales son incorrectas, muestra un mensaje de error
-            echo "<script>alert('Email o contraseña incorrectos.');</script>";
-            echo "<script>window.location.href = 'indexlogin.php';</script>";
+            echo "<script>swal('Error', 'Email o contraseña incorrectos', 'error').then(() => { window.location.href = 'indexlogin.php'; });</script>";
         }
 
         $conn->close();

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinica Veterinaria</title>
     <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="shortcut icon" href="../login/img/pet.png">
+    <link rel="shortcut icon" href="./login/img/pet.png">
 </head>
 <body>
   <header>
@@ -17,7 +17,7 @@
             <li class="btn" onclick="navigateTo('index.html')">Inicio</li>
             <li class="btn" onclick="navigateTo('./mascotas/mascotas_index.html')">Mascotas</li>
             <li class="btn" onclick="navigateTo('./servicios/servicios.html')">Servicios</li>
-            <li class="btn" onclick="navigateTo('./profile/index.html')">Perfil</li> 
+            <li class="btn" onclick="navigateToProfile('./profile/index.php')">Perfil</li>
             <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Ingresar</li>
             <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Registro</li>
           </ul>
@@ -97,6 +97,17 @@
           }
       };
   </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    function navigateToProfile(url) {
+        // Verifica si el usuario está iniciado sesión
+        <?php if (isset($_SESSION['nombre']) && isset($_SESSION['apellido'])) : ?>
+            window.location.href = url; // Si está iniciado sesión, redirige al perfil
+        <?php else : ?>
+            swal('Inicia sesión primero', 'Debes iniciar sesión para acceder a tu perfil', 'warning'); // Si no está iniciado sesión, muestra el Sweet Alert
+        <?php endif; ?>
+    }
+</script>
     </main>
     <footer>
         <p>&copy; 2023 Clínica Veterinaria</p>

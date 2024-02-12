@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 ?>
 <!DOCTYPE html>
@@ -8,6 +8,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/stylelogin.css">
 	<link rel="shortcut icon" href="img/pet.png">
+	<script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
 	<title>INICIAR SESION</title>
 </head>
 <body>

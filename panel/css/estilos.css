@@ -61,7 +61,6 @@ body {
     margin-left: 20px;
     display: none;
 }
-
 .top-menu .toggle {
     width: 30px;
     height: 20px;
@@ -201,17 +200,70 @@ body {
     padding: 20px;
     border-radius: 10px;
 }
+/*Boton de cerrar sesion*/
+.menu-dashboard .logout-btn {
+    background-color: var(--verde-oscuro);
+    color: var(--blanco);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
 
+.menu-dashboard .logout-btn:hover {
+    background-color: #0c6d01; /* Cambia el color al hacer hover */
+}
+/*Estilos para la seccion 2 "Mascotas"*/
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
+thead {
+    background-color: #f2f2f2;
+}
 
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    color:black;
+}
 
+th {
+    background-color: #4CAF50;
+    color: white;
+}
 
+/* Estilos para filas impares */
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
 
+/*Estilos botones de editar y eliminar*/
+.editar-btn,
+.eliminar-btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.editar-btn {
+    background-color: #007bff;
+    color: #fff;
+}
 
+.eliminar-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
 
-
-
-
-
-
+.editar-btn:hover {
+    background-color: #0056b3;
+}

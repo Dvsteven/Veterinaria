@@ -274,11 +274,10 @@ button:hover {
 
 /* Estilos para el botón "Ir a tienda" */
 .go-to-store-button {
-    position: fixed;
     bottom: 10px;
     right: 10px;
     padding: 10px;
-    background-color: #4CAF50; /* Puedes cambiar el color de fondo según tu preferencia */
+    background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 5px;
@@ -299,4 +298,20 @@ button:hover {
 
 #cart-items li {
     margin-bottom: 5px;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.cart-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    animation: fadeInOut 0.5s ease-in-out;
 }
