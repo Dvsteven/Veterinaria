@@ -38,19 +38,3 @@ Y hacer pruebas
 --------------------------------------------------------
 Roles para base de datos de personal:
 Admin - Medico
-
-
-
-Login de personal (admin y med)
-codigo descartado:
-            // Imprime la alerta con el nombre de la persona
-            echo "<script type=\"text/javascript\">alert(\"Inicio de sesión exitoso! Bienvenido, $nombre $apellido\");</script>";
-            // Redirige a la página principal
-            echo "<meta http-equiv='refresh' content='0; url=../panel/index.php'>";
-        } else {
-            // Si las credenciales son incorrectas, muestra un mensaje de error
-            echo "<script>alert('Email o contraseña incorrectos.');</script>";
-            echo "<script>window.location.href = 'indexlogin.php';</script>";
-        }
-
-        $conn->close(); 
