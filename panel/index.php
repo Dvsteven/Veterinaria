@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="./css/estilos.css">
     <!-- JS -->
     <script src="./js/app.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
 
@@ -50,18 +51,23 @@
         <!-- MENU -->
         <div class="menu">
             <div class="enlace">
-                <i class="bx bx-grid-alt"></i>
-                <span>Dashboard</span>
+                <a href="index.php">
+                    <i class="bx bx-grid-alt"></i>
+                    <span>Dashboard</span>
+                </a>
             </div>
 
             <div class="enlace">
-                <i class="bx bx-grid-alt"></i>
-                <span>Info del perfil</span>
+                <a href="indexreg.html">
+                    <i class="bx bx-grid-alt"></i>
+                    <span>Registro personal</span>
+                </a>
             </div>
+
 
             <div class="enlace">
                 <i class="bx bx-user"></i>
-                <span>Usuario</span>
+                <span>Informes Citas Generales</span>
             </div>
 
             <div class="enlace">
@@ -110,6 +116,7 @@
                             <th>Dirección</th>
                             <th>Correo Electrónico</th>
                             <th>Usuario</th>
+                            <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -128,8 +135,9 @@
                                     echo "<td>" . $row["direccion"] . "</td>";
                                     echo "<td>" . $row["correo_electronico"] . "</td>";
                                     echo "<td>" . $row["usuario"] . "</td>";
+                                    echo "<td>" . $row["estado"] . "</td>";
                                     echo "<td>";
-                                    echo "<button class='editar-btn' href='editar_usuario.php(" . $row['id'] . ")'>Editar</button>";
+                                    echo "<button class='editar-btn' onclick='editarRegistro(" . $row['id'] . ")'>Editar</button>";
                                     echo "<button class='eliminar-btn' onclick='eliminarRegistro(" . $row['id'] . ")'>Eliminar</button>";
                                     echo "</td>";
                                     echo "</tr>";
@@ -138,6 +146,48 @@
                                 echo "<tr><td colspan='11'>No hay usuarios registrados</td></tr>";
                             }
                         ?>
+                        <script>
+                            // Función para eliminar un registro
+                            function eliminarRegistro(id) {
+                                // Mostrar una alerta de SweetAlert2 para confirmar la eliminación
+                                Swal.fire({
+                                    title: '¿Estás seguro?',
+                                    text: 'Esta acción no se puede revertir',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Sí, eliminar',
+                                    cancelButtonText: 'Cancelar'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Si el usuario confirma, enviar una solicitud AJAX para eliminar el registro
+                                        $.ajax({
+                                            url: 'acciones/eliminar_usuario.php',
+                                            type: 'POST',
+                                            data: { id: id },
+                                            success: function(response) {
+                                                // Si la eliminación fue exitosa, mostrar una alerta y recargar la página
+                                                Swal.fire({
+                                                    title: 'Eliminación exitosa!',
+                                                    text: 'El usuario se ha eliminado correctamente',
+                                                    icon: 'success'
+                                                }).then(() => { window.location.reload(); });
+                                            },
+                                            error: function() {
+                                                // Si hubo un error al eliminar, mostrar una alerta de error
+                                                Swal.fire({
+                                                    title: 'Error!',
+                                                    text: 'Ocurrió un error al eliminar el usuario',
+                                                    icon: 'error'
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                            function editarRegistro(id) {
+                                window.location.href="acciones/editar_usuario.php?id=" + id;
+                            }
+                        </script>
                     </tbody>
                 </table>
             </div>
@@ -186,6 +236,26 @@
                                 echo "<tr><td colspan='6'>No hay mascotas registradas.</td></tr>";
                             }
                         ?>
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                        <script>
+                            // Función para eliminar un registro
+                            function eliminarRegistro(id) {
+                                // Mostrar una alerta de SweetAlert2 para confirmar la eliminación
+                                Swal.fire({
+                                    title: '¿Estás seguro?',
+                                    text: 'Esta acción no se puede revertir',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Sí, eliminar',
+                                    cancelButtonText: 'Cancelar'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Si el usuario confirma, redirige a una página para procesar la eliminación del registro
+                                        window.location.href = "eliminar_usuario.php?id=" + id;
+                                    }
+                                });
+                            }
+                        </script>
                     </tbody>
                 </table>
             </div>
@@ -236,6 +306,26 @@
                             // Cerrar la conexión a la base de datos
                             $conn->close();
                         ?>
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                        <script>
+                            // Función para eliminar un registro
+                            function eliminarRegistro(id) {
+                                // Mostrar una alerta de SweetAlert2 para confirmar la eliminación
+                                Swal.fire({
+                                    title: '¿Estás seguro?',
+                                    text: 'Esta acción no se puede revertir',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Sí, eliminar',
+                                    cancelButtonText: 'Cancelar'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Si el usuario confirma, redirige a una página para procesar la eliminación del registro
+                                        window.location.href = "eliminar_usuario.php?id=" + id;
+                                    }
+                                });
+                            }
+                        </script>
                     </tbody>
                 </table>
             </div>

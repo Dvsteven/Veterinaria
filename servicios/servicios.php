@@ -1,7 +1,15 @@
 <?php
-
     session_start();
 
+    // Verificar si el usuario está logueado
+    $usuarioLogueado = isset($_SESSION['nombre']) && isset($_SESSION['apellido']);
+
+    // Si se hace clic en el botón de cerrar sesión, cerrar la sesión y redirigir a la página de inicio
+    if (isset($_POST['cerrar_sesion'])) {
+        session_destroy();
+        header("Location: ../index.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -9,20 +17,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinica Veterinaria AlegreCola</title>
+    <title>Clinica Veterinaria</title>
     <link rel="stylesheet" href="./stylesheets/estilo.css">
     <link rel="shortcut icon" href="../login/img/pet.png">
 </head>
 <body>
   <header>
-      <nav>
+  <nav>
           <ul class="data-container">
             <li class="btn" onclick="navigateTo('../index.php')">Inicio</li>
             <li class="btn" onclick="navigateTo('../mascotas/mascotas_index.php')">Mascotas</li>
-            <li class="btn" onclick="navigateTo('#')">Servicios</li>
-            <li class="btn" onclick="navigateTo('../profile/index.php')">Perfil</li> 
-            <li class="btn" onclick="navigateTo('../login_usuarios/login.php')">Ingresar</li>
-            <li class="btn" onclick="navigateTo('../login_usuarios/login.php')">Registro</li>
+            <li class="btn" onclick="navigateTo('servicios.php')">Servicios</li>
+            <li class="btn" onclick="navigateToProfile('../profile/index.php')">Perfil</li>
+            <?php if ($usuarioLogueado) : ?>
+            <form action="../index.php" method="post">
+                <button class="cierre-sesion" type="submit" name="cerrar_sesion">Cerrar Sesión</button>
+            </form>
+            <?php else : ?>
+                <li class="btn" onclick="navigateTo('../login_usuarios/login.php')">Ingresar</li>
+                <li class="btn" onclick="navigateTo('../login_usuarios/login.php')">Registro</a></li>
+            <?php endif; ?>
           </ul>
       </nav>
   </header>
@@ -32,9 +46,20 @@
           window.location.href = url;
       }
     </script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        function navigateToProfile(url) {
+            // Verifica si el usuario está iniciado sesión
+            <?php if (isset($_SESSION['nombre']) && isset($_SESSION['apellido'])) : ?>
+                window.location.href = url; // Si está iniciado sesión, redirige al perfil
+            <?php else : ?>
+                swal('Inicia sesión primero', 'Debes iniciar sesión para acceder a tu perfil', 'warning'); // Si no está iniciado sesión, muestra el Sweet Alert
+            <?php endif; ?>
+        }
+    </script>
     <main>
         <section class="pet">
-            <h1>Nuestros Servicios de AlegreCola</h1>
+            <h1>Nuestros Servicios</h1>
         </section>
 
         <section class="service" id="consultaMedica">
@@ -52,6 +77,50 @@
         <div id="form1" class="hidden-form">
             <h2>Formulario para Solicitar Servicio 1</h2>
             <!-- Aquí coloca los campos del formulario para el Servicio 1 -->
+
+            <style>
+                form {
+                    max-width: 600px;
+                    margin: auto;
+                }
+                label {
+                    display: block;
+                    margin-bottom: 8px;
+                }
+                input, select {
+                    width: 100%;
+                    padding: 8px;
+                    margin-bottom: 16px;
+                    box-sizing: border-box;
+                }
+                button {
+                    background-color: #4caf50;
+                    color: white;
+                    padding: 10px 15px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+                button:hover {
+                    background-color: #45a049;
+                }
+            </style>
+
+            <form action="procesamiento_forms/procesamiento.php" method="post">
+                <label for="nombre_dueño">Nombre del Dueño:</label>
+                <input type="text" id="nombre_dueño" name="nombre_dueño" required>
+        
+                <label for="nombre_mascota">Nombre de la Mascota:</label>
+                <input type="text" id="nombre_mascota" name="nombre_mascota" required>
+        
+                <label for="fecha_cita">Fecha de la Cita:</label>
+                <input type="date" id="fecha_cita" name="fecha_cita" required>
+        
+                <label for="razon_cita">Razón de la Cita:</label>
+                <textarea id="razon_cita" name="razon_cita" rows="4" required></textarea>
+        
+                <button type="submit">Enviar Cita</button>
+            </form>
         </div>
 
         <section class="service" id="vacunas">
@@ -68,6 +137,72 @@
         <div id="form2" class="hidden-form">
             <h2>Formulario para Solicitar Servicio 2</h2>
             <!-- Aquí coloca los campos del formulario para el Servicio 2 -->
+            
+            <style>
+/* Estilos para el formulario */
+            .form-container {
+                max-width: 400px;
+                margin: 20px auto;
+                padding: 30px;
+                background-color: #fff;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+            }
+
+            .form-label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: bold;
+            }
+
+            .form-input,
+            .form-textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 16px;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .form-textarea {
+                resize: vertical; /* Permite redimensionar verticalmente */
+            }
+
+            .form-submit {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s;
+            }
+
+            .form-submit:hover {
+                background-color: #45a049;
+            }
+
+        </style>
+
+            <form action="procesamiento_forms/procesamiento.php" method="post">
+                <label for="nombre_dueño">Nombre del Dueño:</label>
+                <input type="text" id="nombre_dueño" name="nombre_dueño" required>
+        
+                <label for="nombre_mascota">Nombre de la Mascota:</label>
+                <input type="text" id="nombre_mascota" name="nombre_mascota" required>
+        
+                <label for="fecha_cita">Fecha de la Cita:</label>
+                <input type="date" id="fecha_cita" name="fecha_cita" required>
+        
+                <label for="razon_cita">Razón de la Cita:</label>
+                <textarea id="razon_cita" name="razon_cita" rows="4" required></textarea>
+        
+                <button type="submit">Enviar Cita</button>
+            </form>
+        </div>
+
         </div>
 
         <section class="service" id="cirugias">
@@ -87,6 +222,51 @@
         <div id="form3" class="hidden-form">
             <h2>Formulario para Solicitar Servicio 3</h2>
             <!-- Aquí coloca los campos del formulario para el Servicio 2 -->
+            <style>
+                form {
+                    max-width: 600px;
+                    margin: auto;
+                }
+                label {
+                    display: block;
+                    margin-bottom: 8px;
+                }
+                input, select {
+                    width: 100%;
+                    padding: 8px;
+                    margin-bottom: 16px;
+                    box-sizing: border-box;
+                }
+                button {
+                    background-color: #4caf50;
+                    color: white;
+                    padding: 10px 15px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+                button:hover {
+                    background-color: #45a049;
+                }
+            </style>
+
+            <form action="procesamiento_forms/procesamiento.php" method="post">
+                <label for="nombre_dueño">Nombre del Dueño:</label>
+                <input type="text" id="nombre_dueño" name="nombre_dueño" required>
+        
+                <label for="nombre_mascota">Nombre de la Mascota:</label>
+                <input type="text" id="nombre_mascota" name="nombre_mascota" required>
+        
+                <label for="fecha_cita">Fecha de la Cita:</label>
+                <input type="date" id="fecha_cita" name="fecha_cita" required>
+        
+                <label for="razon_cita">Razón de la Cita:</label>
+                <textarea id="razon_cita" name="razon_cita" rows="4" required></textarea>
+        
+                <button type="submit">Enviar Cita</button>
+            </form>
+        </div>
+
         </div>
 
         <section class="service" id="examenesLaboratorio">
@@ -103,8 +283,53 @@
         </section>
 
         <div id="form4" class="hidden-form">
-            <h2>Formulario para Solicitar Servicio 2</h2>
+            <h2>Formulario para Solicitar Servicio 4</h2>
             <!-- Aquí coloca los campos del formulario para el Servicio 2 -->
+            <style>
+                form {
+                    max-width: 600px;
+                    margin: auto;
+                }
+                label {
+                    display: block;
+                    margin-bottom: 8px;
+                }
+                input, select {
+                    width: 100%;
+                    padding: 8px;
+                    margin-bottom: 16px;
+                    box-sizing: border-box;
+                }
+                button {
+                    background-color: #4caf50;
+                    color: white;
+                    padding: 10px 15px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+                button:hover {
+                    background-color: #45a049;
+                }
+            </style>
+
+            <form action="procesamiento_forms/procesamiento.php" method="post">
+                <label for="nombre_dueño">Nombre del Dueño:</label>
+                <input type="text" id="nombre_dueño" name="nombre_dueño" required>
+        
+                <label for="nombre_mascota">Nombre de la Mascota:</label>
+                <input type="text" id="nombre_mascota" name="nombre_mascota" required>
+        
+                <label for="fecha_cita">Fecha de la Cita:</label>
+                <input type="date" id="fecha_cita" name="fecha_cita" required>
+        
+                <label for="razon_cita">Razón de la Cita:</label>
+                <textarea id="razon_cita" name="razon_cita" rows="4" required></textarea>
+        
+                <button type="submit">Enviar Cita</button>
+            </form>
+        </div>
+
         </div>
 
         <section class="service" id="guarderia">
@@ -122,8 +347,53 @@
         </section>
 
         <div id="form5" class="hidden-form">
-            <h2>Formulario para Solicitar Servicio 2</h2>
+            <h2>Formulario para Solicitar Servicio 5</h2>
             <!-- Aquí coloca los campos del formulario para el Servicio 2 -->
+            <style>
+                form {
+                    max-width: 600px;
+                    margin: auto;
+                }
+                label {
+                    display: block;
+                    margin-bottom: 8px;
+                }
+                input, select {
+                    width: 100%;
+                    padding: 8px;
+                    margin-bottom: 16px;
+                    box-sizing: border-box;
+                }
+                button {
+                    background-color: #4caf50;
+                    color: white;
+                    padding: 10px 15px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+                button:hover {
+                    background-color: #45a049;
+                }
+            </style>
+
+            <form action="procesamiento_forms/procesamiento.php" method="post">
+                <label for="nombre_dueño">Nombre del Dueño:</label>
+                <input type="text" id="nombre_dueño" name="nombre_dueño" required>
+        
+                <label for="nombre_mascota">Nombre de la Mascota:</label>
+                <input type="text" id="nombre_mascota" name="nombre_mascota" required>
+        
+                <label for="fecha_cita">Fecha de la Cita:</label>
+                <input type="date" id="fecha_cita" name="fecha_cita" required>
+        
+                <label for="razon_cita">Razón de la Cita:</label>
+                <textarea id="razon_cita" name="razon_cita" rows="4" required></textarea>
+        
+                <button type="submit">Enviar Cita</button>
+            </form>
+        </div>
+
         </div>
 
       <section class="citas">

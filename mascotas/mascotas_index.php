@@ -1,5 +1,15 @@
 <?php
     session_start();
+
+    // Verificar si el usuario está logueado
+    $usuarioLogueado = isset($_SESSION['nombre']) && isset($_SESSION['apellido']);
+
+    // Si se hace clic en el botón de cerrar sesión, cerrar la sesión y redirigir a la página de inicio
+    if (isset($_POST['cerrar_sesion'])) {
+        session_destroy();
+        header("Location: ../index.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,9 +29,15 @@
             <li class="btn" onclick="navigateTo('../index.php')">Inicio</li>
             <li class="btn" onclick="navigateTo('#')">Mascotas</li>
             <li class="btn" onclick="navigateTo('../servicios/servicios.php')">Servicios</li>
-            <li class="btn" onclick="navigateTo('../profile/index.php')">Perfil</li> 
-            <li class="btn" onclick="navigateTo('../login_usuarios/login.php')">Ingresar</li>
-            <li class="btn" onclick="navigateTo('../login_usuarios/login.php')">Registro</a></li>   
+            <li class="btn" onclick="navigateToProfile('../profile/index.php')">Perfil</li> <!--Esto se usa junto con el script de restr de acceso al perfil-->
+            <?php if ($usuarioLogueado) : ?>
+            <form action="../index.php" method="post">
+                <button class="cierre-sesion" type="submit" name="cerrar_sesion">Cerrar Sesión</button>
+            </form>
+            <?php else : ?>
+                <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Ingresar</li>
+                <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Registro</a></li>
+            <?php endif; ?>   
           </ul>
       </nav>
   </header>
@@ -29,7 +45,7 @@
     <script>
       function navigateTo(url) {
           window.location.href = url;
-      }
+        }
     </script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
@@ -42,6 +58,8 @@
             <?php endif; ?>
         }
     </script>
+        <div class="fondo-pet"> </div>
+    <!-- <img src="../img/background/huella.png" alt=""> -->
     <main>
         <section class="pet">
             <h1>Bienvenido a la Clínica Veterinaria AlegreCola</h1>
@@ -62,7 +80,7 @@
                 <div class="registration-box">
                     <!-- Contenido del formulario de registro de mascotas -->
                     <h2>Registrar Mascota</h2>
-                    <form action="agregar_mascota.php" method="POST">                        <!-- Agrega campos del formulario según tus necesidades -->
+                    <form class="register-form" action="agregar_mascota.php" method="POST">                        <!-- Agrega campos del formulario según tus necesidades -->
                         <label for="nombre">Nombre Dueño:</label>
                         <input type="text" id="nombre" name="nombre" required>
                         <br>

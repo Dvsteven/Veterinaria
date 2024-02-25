@@ -17,7 +17,7 @@
     $usuario = $_POST['usuario'];
     $contrasena = $_POST['contrasena'];
 
-    $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' AND contrasena = '$contrasena'";
+    $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
     $result = $conn->query($sql);
 ?>
 
@@ -25,27 +25,42 @@
 
 <?php
     if ($result->num_rows > 0) {
-        // Obtiene los datos del usuario
-        $row = $result->fetch_assoc();
-        $nombre = $row["nombre"];
-        $apellido = $row["apellido"];
-        $email = $row["correo_electronico"];
-        $telefono = $row["telefono"];
-        $direccion = $row["direccion"];
+    // Verificar si el usuario existe
+    $sql_usuario = "SELECT * FROM usuarios WHERE usuario = '$usuario'";
+    $result_usuario = $conn->query($sql_usuario);
 
-        // Guarda los datos del usuario en las variables de sesión
-        $_SESSION['nombre'] = $nombre;
-        $_SESSION['apellido'] = $apellido;
-        $_SESSION['correo_electronico'] = $email;
-        $_SESSION['telefono'] = $telefono;
-        $_SESSION['direccion'] = $direccion;
+    if ($result_usuario->num_rows > 0) {
+        // Verificar si la contraseña es correcta
+        $sql_contrasena = "SELECT * FROM usuarios WHERE contrasena = '$contrasena'";
+        $result_contrasena = $conn->query($sql_contrasena);
 
-        echo "<script>swal('Inicio de sesión exitoso!', 'Bienvenido, $nombre $apellido', 'success').then(() => { window.location.href = '../profile/index.php'; });</script>";
-        exit();
+        if ($result_contrasena->num_rows > 0) {
+            // Obtiene los datos del usuario
+            $row = $result_usuario->fetch_assoc();
+            $nombre = $row["nombre"];
+            $apellido = $row["apellido"];
+            $email = $row["correo_electronico"];
+            $telefono = $row["telefono"];
+            $direccion = $row["direccion"];
+
+            // Guarda los datos del usuario en las variables de sesión
+            $_SESSION['nombre'] = $nombre;
+            $_SESSION['apellido'] = $apellido;
+            $_SESSION['correo_electronico'] = $email;
+            $_SESSION['telefono'] = $telefono;
+            $_SESSION['direccion'] = $direccion;
+
+            echo "<script>swal('Inicio de sesión exitoso!', 'Bienvenido, $nombre $apellido', 'success').then(() => { window.location.href = '../profile/index.php'; });</script>";
+            exit();
+        } else {
+            // Contraseña incorrecta
+            echo "<script>swal('Inicio de sesión fallido!', 'Contraseña incorrecta', 'error').then(() => { window.location.href = 'login.php'; });</script>";
+        }
     } else {
-        // Autenticación fallida
-        echo "Usuario o contraseña incorrectos";
+        // Usuario incorrecto
+        echo "<script>swal('Inicio de sesión fallido!', 'Usuario incorrecto', 'error').then(() => { window.location.href = 'login.php'; });</script>";
     }
+}
 
     // Cerrar la conexión a la base de datos
     $conn->close();

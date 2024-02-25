@@ -1,6 +1,17 @@
 <?php
-  session_start();
+    session_start();
+
+    // Verificar si el usuario está logueado
+    $usuarioLogueado = isset($_SESSION['nombre']) && isset($_SESSION['apellido']);
+
+    // Si se hace clic en el botón de cerrar sesión, cerrar la sesión y redirigir a la página de inicio
+    if (isset($_POST['cerrar_sesion'])) {
+        session_destroy();
+        header("Location: index.php");
+        exit;
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,19 +25,25 @@
   <header>
       <nav>
           <ul class="data-container">
-            <li class="btn" onclick="navigateTo('index.html')">Inicio</li>
+            <li class="btn" onclick="navigateTo('index.php')">Inicio</li>
             <li class="btn" onclick="navigateTo('./mascotas/mascotas_index.php')">Mascotas</li>
             <li class="btn" onclick="navigateTo('./servicios/servicios.php')">Servicios</li>
             <li class="btn" onclick="navigateToProfile('./profile/index.php')">Perfil</li>
-            <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Ingresar</li>
-            <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Registro</li>
+            <?php if ($usuarioLogueado) : ?>
+            <form action="index.php" method="post">
+                <button type="submit" name="cerrar_sesion">Cerrar Sesión</button>
+            </form>
+            <?php else : ?>
+                <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Ingresar</li>
+                <li class="btn" onclick="navigateTo('./login_usuarios/login.php')">Registro</a></li>
+            <?php endif; ?>
           </ul>
       </nav>
   </header>
     <!-- Alternativa JavaScript para manejar la barra de navegacion -->
     <script>
       function navigateTo(url) {
-          window.location.href = url;
+            window.location.href = url;
       }
     </script>
     <div class="fondo-pet"> </div>

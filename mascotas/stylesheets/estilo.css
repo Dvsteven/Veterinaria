@@ -6,6 +6,11 @@ body {
     background: linear-gradient(to top, #60df91, rgb(216, 250, 192), #ffffff);
 }
 
+/*Ocultando el scrollbar*/
+::-webkit-scrollbar {
+    display: none;
+}
+
 header {
     background-color: #60df91;
     color: #fff;
@@ -13,7 +18,6 @@ header {
     text-align: right;
     width: auto;
     height: auto;
-
 }
 
 nav ul {
@@ -64,13 +68,57 @@ cursor:pointer;
         }
     }
 }
+/*Boton de cierre de sesion navbar*/
+.cierre-sesion[type="submit"] {
+    cursor:pointer;
+    position:relative;
+    padding:10px 20px;
+    background:#60df91;
+    font-size:16px;
+    top: -28px;
+    left: -475px;
+    border-top-right-radius:10px;
+    border-bottom-left-radius:10px;
+    transition:all 1s;
+    &:after,&:before{
+        content:" ";
+        width:10px;
+        height:10px;
+        position:absolute;
+        border :0px solid #fff;
+        transition:all 0.4s;
+    }
+    &:after{
+        top:-1px;
+        left:-1px;
+        border-top:5px solid #60df91;
+        border-left:5px solid #60df91;
+    }
+    &:before{
+        bottom:-1px;
+        right:-1px;
+        border-bottom:5px solid #60df91;
+        border-right:5px solid #60df91;
+    }
+    &:hover{
+        border-top-right-radius:0px;
+        border-bottom-left-radius:0px;
+        background:rgba(0,0,0,.5);
+        color:white;
+        &:before,&:after{
+            width:100%;
+            height:100%;
+            border-color:rgb(0, 0, 0);
+        }
+    }
+}
 
-nav li {
+nav li, button {
     display: inline;
     margin-right: 20px;
 }
 
-nav a {
+nav a, button {
     text-decoration: none;
     color: #fff;
 }
@@ -83,7 +131,6 @@ main {
     background-color: #badbda;
     border: 1px solid #ccc;
 }
-
 /* Para las secciones nuevas de mascotas */
 .container {
     display: flex;
@@ -114,7 +161,7 @@ main {
     border-radius: 5px;
 }
 
-/* Agrega estilos de slider (puedes personalizar según tu preferencia) */
+/* estilos de slider */
 .slider-container {
     position: relative;
 }
@@ -160,7 +207,7 @@ footer {
     margin-bottom: 30px;
 }
 
-form {
+.register-form {
     max-width: 400px;
     margin: 20px auto;
     background-color: #edffe2;

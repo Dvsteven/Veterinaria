@@ -13,7 +13,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $usuario = $_POST["usuario"];
     $contrasena = $_POST["contrasena"];
     $confirmar_contrasena = $_POST["confirmar_contrasena"];
-    $cargo = "CLIENTE";
 
     if($contrasena === $confirmar_contrasena) {
         $sql = "INSERT INTO usuarios (nombre, apellido, tipo_documento, documento, telefono, direccion, correo_electronico, usuario, contrasena) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -22,22 +21,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         if($stmt->execute()) {
 
-            echo "¡Registro exitoso!";
+            echo "<script>swal('Inicio de sesión exitoso!', 'Bienvenido, ahora puedes iniciar sesion', 'success');</script>";
         } else {
-
-            echo "Error al registrar el usuario: " . $conn->error;
+            echo "<script>swal('Error al registrar el usuario: ', '$conn->error', 'error');</script>";
         }
 
 
         $stmt->close();
     } else {
-
-        echo "Las contraseñas no coinciden.";
+        echo "<script>swal('Las contraseñas no coinciden.''error');</script>";
     }
 
     $conn->close();
 } else {
-
-    echo "Acceso incorrecto.";
+    echo "<script>swal('Acceso incorrecto.''error');</script>";
 }
 ?>

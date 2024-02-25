@@ -1,6 +1,3 @@
-<?php
-	session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +14,7 @@
 		<div class="card">
 			<div class="head">
 				<div></div>
-				<a id="login" class="selected" href="indexlogin.html">Iniciar sesion</a>
-				<a id="register" href="indexreg.html">Registrarse</a>
+				<a id="login" class="selected">Iniciar sesion</a>
 				<div></div>
 			</div>
 			<div class="tabs">

@@ -6,6 +6,7 @@
     $_SESSION['telefono'];
     $_SESSION['direccion'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +20,10 @@
     <div class="container">
         <div class="main">
             <div class="topbar">
-                <a href="mascota.html">Mascota</a>
-                <a href="">Citas</a>
-                <a href="">Compras</a>
                 <a href="">Historial</a>
+                <a href="">Compras</a>
+                <a href="">Citas</a>
+                <a href="mascota.html">Mascota</a>
             </div>
             <div class="row">
                 <div class="col-md-4 mt-1">
@@ -33,11 +34,10 @@
                                 <h3>
                                     <p><?php echo $_SESSION['nombre'], ' ', $_SESSION['apellido']; ?></p>
                                 </h3>
-                                <h5>Ir a:</h5>
                                 <a href="../index.php">Inicio</a>
-                                <a href="../servicios/servicios.html">Servicios</a>
-                                <a href="../citas/citas.html">Citas</a>
-                                <a href="../mascotas/mascotas_index.html">Productos</a>
+                                <a href="../servicios/servicios.php">Servicios</a>
+                                <a href="../citas/citas.php">Citas</a>
+                                <a href="../mascotas/mascotas_index.php">Productos</a>
                                 <a href="">Editar Perfil</a>
                             </div>
                         </div>

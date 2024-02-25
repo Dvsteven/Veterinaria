@@ -24,6 +24,11 @@ body {
     color: var(--blanco);
 }
 
+/*Ocultando el scrollbar*/
+::-webkit-scrollbar {
+    display: none;
+}
+
 /* LAYOUT */
 
 .menu-dashboard {
@@ -112,7 +117,7 @@ body {
     align-items: center;
     margin-bottom: 20px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     transition: all .3s ease;
 }
 
@@ -128,6 +133,11 @@ body {
 .menu .enlace span {
     opacity: 0;
     transition: opacity .3s ease;
+}
+
+.menu .enlace a{
+    text-decoration: none;
+    color: var(--blanco);
 }
 
 .menu-dashboard.open {
@@ -160,7 +170,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px; /* Espacio entre secciones */
-    margin-left: 250px; /* Ancho del menú */
+    margin-left: 140px; /* Ancho del menú */
     padding: 20px;
 }
 

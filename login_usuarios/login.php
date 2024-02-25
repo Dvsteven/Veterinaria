@@ -32,11 +32,10 @@
                 <div class="icons">
                 </div>
                 <p>o Iniciar Sesión con una cuenta</p>
-
                 <form method="post" class="form" action="validacion.php">
                     <label >
                         <i class='bx bx-envelope' ></i>
-                        <input type="usuario" name="usuario" placeholder=" Usuario" required>
+                        <input type="text" name="usuario" placeholder="Usuario" required>
                     </label>
                     <label>
                         <i class='bx bx-lock-alt' ></i>
@@ -47,9 +46,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="container-form register hide">
         <div class="information">
             <div class="info-childs">
@@ -126,7 +122,7 @@
             if (this.checked) {
                 window.location.href = '../login/indexlogin.php?switch=on'; // Redirigir a la página 2 con el switch activado
             } else {
-                window.location.href = './login/indexlogin.php'; // Redirigir a la página 2 con el switch desactivado
+                window.location.href = '../login/indexlogin.php'; // Redirigir a la página 2 con el switch desactivado
             }
         });
     </script>

@@ -22,7 +22,7 @@
 
 <?php
 
-        if ($result->num_rows == 1) {
+        if ($result->num_rows > 0) {
             // Usuario válido, inicia sesión y redirige
             // Obtiene los datos del usuario
             $row = $result->fetch_assoc();
