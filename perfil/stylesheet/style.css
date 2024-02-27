@@ -173,31 +173,18 @@ body {
     background-color: var(--bg-menu);
     padding: 20px;
     border-radius: 10px;
-    width: 100%;
-
 }
 
 .section2 {
     background-color: var(--bg-menu);
     padding: 20px;
     border-radius: 10px;
-    width: 100%;
-    
 }
 
-.section3 {
-    background-color: var(--bg-menu);
-    padding: 20px;
-    border-radius: 10px;
-    width: 100%;
-    
-}
 .content-section{
     display: flex;
-    /* flex-direction: column; */
-    width: 100%;
+    flex-direction: column; /* Cambia a columna */
     gap: 20px;
-    /* justify-content: space-between; */
 }
 
 .box {
@@ -220,7 +207,6 @@ body {
 .menu-dashboard .logout-btn:hover {
     background-color: #0c6d01; /* Cambia el color al hacer hover */
 }
-/*Estilos para la seccion 2 "Mascotas"*/
 /* Estilos para la tabla */
 table {
     width: 100%;
@@ -250,7 +236,7 @@ tbody tr:nth-child(odd) {
 
 /*Estilos botones de editar y eliminar*/
 .editar-btn,
-.eliminar-btn {
+.cancelar-btn {
     padding: 5px 10px;
     margin-right: 5px;
     border: none;
@@ -264,11 +250,15 @@ tbody tr:nth-child(odd) {
     color: #fff;
 }
 
-.eliminar-btn {
+.cancelar-btn {
     background-color: #dc3545;
     color: #fff;
 }
 
 .editar-btn:hover {
     background-color: #0056b3;
+}
+
+.cancelar-btn:hover {
+    background-color: #881505;
 }

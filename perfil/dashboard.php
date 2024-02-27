@@ -2,6 +2,14 @@
     session_start();
     $_SESSION['nombre'];
     $_SESSION['apellido'];
+
+    // Conexión a la base de datos
+    $conn = new mysqli("localhost", "root", "", "veterinaria");
+
+    if ($conn->connect_error) {
+        die("Conexión fallida: " . $conn->connect_error);
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Dashboard</title>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="stylesheet" href="./stylesheet/style.css">
-
     <script src="./js/app.js" defer></script>
 </head>
 <body>
@@ -42,33 +50,13 @@
             </div>
 
             <div class="enlace">
-                <i class="bx bx-grid-alt"></i>
-                <span>Info del perfil</span>
-            </div>
-
-            <div class="enlace">
-                <i class="bx bx-user"></i>
-                <span>Usuario</span>
-            </div>
-
-            <div class="enlace">
                 <i class="bx bx-message-square"></i>
                 <span>Citas</span>
             </div>
 
             <div class="enlace">
-                <i class="bx bx-file-blank"></i>
-                <span>Archivos</span>
-            </div>
-
-            <div class="enlace">
                 <i class="bx bx-cart"></i>
                 <span>Pedidos</span>
-            </div>
-
-            <div class="enlace">
-                <i class="bx bx-heart"></i>
-                <span>Favoritos</span>
             </div>
 
             <div class="enlace">
@@ -80,16 +68,9 @@
     
     <!-- Contenedor principal -->
     <div class="main-container">
+        <div class="content-section">
         <!-- Sección 1 -->
         <div class="section1">
-            <h2>Información de Clientes Registrados</h2>
-            <div class="box">
-                <!-- Tabla para mostrar la información de usuarios -->
-            </div>
-        </div>
-        <div class="content-section">
-        <!-- Sección 2 -->
-        <div class="section2">
             <h2>Información de Mascotas</h2>
             <div class="box">
                 <table>
@@ -101,7 +82,6 @@
                             <th>Tipo de Mascota</th>
                             <th>Raza</th>
                             <th>Contacto</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,10 +101,6 @@
                                     echo "<td>" . $row["tipo_mascota"] . "</td>";
                                     echo "<td>" . $row["raza"] . "</td>";
                                     echo "<td>" . $row["contacto"] . "</td>";
-                                    echo "<td>";
-                                    echo "<button class='editar-btn' href='editar_usuario.php(" . $row['id'] . ")'>Editar</button>";
-                                    echo "<button class='eliminar-btn' onclick='eliminarRegistro(" . $row['id'] . ")'>Eliminar</button>";
-                                    echo "</td>";
                                     echo "</tr>";
                                 }
                             } else {
@@ -135,10 +111,101 @@
                 </table>
             </div>
         </div>
-        <!-- Sección 3 -->
-        <div class="section3">
-            <h2>Información del Personal</h2>
+        <!--Seccion 2-->
+        <div class="section2">
+            <h2>Citas</h2>
             <div class="box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre Dueño</th>
+                            <th>Nombre Peludito</th>
+                            <th>Tipo de Mascota</th>
+                            <th>Raza</th>
+                            <th>Contacto</th>
+                            <th>Tipo Cita</th>
+                            <th>Motivo</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Estado cita</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Aquí se agregarán las filas con la información de las mascotas -->
+                        <?php
+                            // Consulta SQL para obtener los datos de las mascotas
+                            $sql = "SELECT * FROM citas";
+                            $result = $conn->query($sql);
+
+                            // Verificar si hay resultados y mostrarlos en la tabla
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row["nombre_dueno"] . "</td>";
+                                    echo "<td>" . $row["nombre_mascota"] . "</td>";
+                                    echo "<td>" . $row["tipo_mascota"] . "</td>";
+                                    echo "<td>" . $row["raza"] . "</td>";
+                                    echo "<td>" . $row["contacto"] . "</td>";
+                                    echo "<td>" . $row["tipo_cita"] . "</td>";
+                                    echo "<td>" . $row["motivo"] . "</td>";
+                                    echo "<td>" . $row["fecha"] . "</td>";
+                                    echo "<td>" . $row["hora"] . "</td>";
+                                    echo "<td>" . $row["estado"] . "</td>";
+                                    echo "<td>";
+                                    echo "<button class='editar-btn' onclick='aceptarCita(" . $row['id'] . ")'>Aceptar</button>";
+                                    echo "<button class='cancelar-btn' onclick='cancelarCita(" . $row['id'] . ")'>Cancelar</button>";
+                                    echo "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='10'>No hay citas agendadas.</td></tr>";
+                            }
+                        ?>
+                        <script>
+                            function aceptarCita(id) {
+                                // Hacer una solicitud AJAX para aceptar la cita
+                                var xhttp = new XMLHttpRequest();
+                                xhttp.onreadystatechange = function() {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        // Mostrar SweetAlert con la respuesta del servidor
+                                        swal({
+                                            title: 'Aceptada Exitosamente',
+                                            text: 'La cita se ha aceptado correctamente',
+                                            icon: 'success'
+                                        }).then(() => {
+                                            // Redirigir a la página principal
+                                            window.location.href = 'dashboard.php';
+                                        });
+                                    }
+                                };
+                                xhttp.open('GET', 'acciones/aceptar_cita.php?id=' + id, true);
+                                xhttp.send();
+                            }
+
+                            function cancelarCita(id) {
+                                // Hacer una solicitud AJAX para cancelar la cita
+                                var xhttp = new XMLHttpRequest();
+                                xhttp.onreadystatechange = function() {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        // Mostrar SweetAlert con la respuesta del servidor
+                                        swal({
+                                            title: 'Cita Cancelada',
+                                            text: 'La cita se ha cancelado correctamente',
+                                            icon: 'success'
+                                        }).then(() => {
+                                            // Redirigir a la página principal
+                                            window.location.href = 'dashboard.php';
+                                        });
+                                    }
+                                };
+                                xhttp.open('GET', 'acciones/cancelar_cita.php?id=' + id, true);
+                                xhttp.send();
+                            }
+
+                        </script>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -1,0 +1,81 @@
+form {
+    background-color: #28a745;
+    padding: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+button, a.btn {
+    background-color: #ffffff;
+    color: #28a745;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none; /* Añadido para quitar la subraya del enlace */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover, a.btn:hover {
+    background-color: #1f3220;
+    color: #ffffff;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+button, a.btn {
+    background-color: #ffffff;
+    color: #28a745;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover, a.btn:hover {
+    background-color: #1f3220;
+    color: #ffffff;
+}

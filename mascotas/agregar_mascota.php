@@ -30,7 +30,7 @@
             VALUES ('$nombre_dueno', '$nombre_mascota', '$edad', '$tipo_mascota', '$raza', '$contacto')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "<script>swal('Registro Exitoso!', 'Bienvenido a la familia peluda', 'success').then(() => { window.location.href = '../mascotas/mascotas_index.html'; });</script>";
+        echo "<script>swal('Registro Exitoso!', 'Bienvenido a la familia peluda', 'success').then(() => { window.location.href = '../mascotas/mascotas_index.php'; });</script>";
     } else {
         echo "Error al registrar la mascota: " . $conn->error;
     }
