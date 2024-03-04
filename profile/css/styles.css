@@ -1,0 +1,94 @@
+.container {
+    background-color: #f8f9fa; /* Color de fondo claro */
+    padding-top: 20px;
+}
+
+.topbar {
+    background-color: #28a745;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+}
+
+.topbar a {
+    color: #ffffff;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.topbar a:hover {
+    color: #922828;
+    text-decoration: underline;
+}
+
+.topbar a:not(:last-child) {
+    margin-right: 20px;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+
+.card.sidebar {
+    background-color: #ffffff; /* Color de fondo del panel lateral */
+    border: none;
+}
+
+.card.content {
+    background-color: #ffffff; /* Color de fondo del contenido principal */
+    border: none;
+}
+
+.card.content h1 {
+    color: #28a745; /* Color del encabezado principal */
+}
+
+.card-body {
+    padding: 20px;
+    border: 2px solid #28a745; /* Ancho, estilo y color del borde */
+    border-radius: 10px; /* Radio del borde */
+    padding: 10px;
+}
+
+.card-body img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
+.card-body h5 {
+    color: #6c757d; /* Color del texto "Ir a:" en el panel lateral */
+}
+
+.card-body a {
+    color: #28a745; /* Color de los enlaces en el panel lateral */
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.card-body a:hover {
+    text-decoration: underline;
+}
+
+.card-body hr {
+    border-top: 1px solid #28a745; /* Línea divisoria entre secciones en el contenido principal */
+    margin: 10px 0;
+}
+
+.row h5 {
+    color: #495057; /* Color del título en el contenido principal */
+}
+
+.row p {
+    color: #6c757d; /* Color del texto en el contenido principal */
+}
