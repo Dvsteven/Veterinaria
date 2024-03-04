@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/store.css">
+    <link rel="shortcut icon" href="../login/img/pet.png">
+    <title>Tienda de Mascotas</title>
+</head>
+<body>
+    <header>
+        <h1>Tienda de Mascotas</h1>
+    </header>
+
+    <section class="product-section">
+        <h2>Descubre nuestros productos para mascotas</h2>
+        <div class="product-container">
+            <!-- ... (productos) ... -->
+        </div>
+    </section>
+
+    <section class="cart-section">
+        <h3>Carrito de compras</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button class="checkout-button" onclick="goToPayment()">Ir al pago</button>
+    </section>
+
+    <!-- Página de pago (simulación) -->
+    <div id="payment-page" style="display: none;">
+        <h2>Página de Pago Seguro</h2>
+        <form id="payment-form">
+            <!-- Campos de información de pago -->
+            <button type="button" onclick="completePayment()">Pagar ahora</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Tienda de Mascotas</p>
+    </footer>
+</body>
+</html>
