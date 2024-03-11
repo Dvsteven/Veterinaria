@@ -56,3 +56,32 @@ a {
     cursor: pointer;
     text-align: center;
 }
+
+.calendar-container {
+    margin-right: 20px;
+    margin-top: -590px;
+    margin-left: 150px;
+}
+
+.calendario {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.calendario th, .calendario td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.calendario th {
+    background-color: #6cbb54;
+}
+
+.calendario td {
+    cursor: pointer;
+}
+
+.fecha-disponible {
+    background-color: lightgreen;
+}

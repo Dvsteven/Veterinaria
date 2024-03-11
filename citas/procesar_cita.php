@@ -28,22 +28,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha = $_POST["fecha"];
     $hora = $_POST["hora"];
 
-    // Verifica si ya existe una cita en la misma fecha y hora
-    $sql = "SELECT * FROM citas WHERE fecha = '$fecha' AND hora = '$hora'";
-    $result = $conn->query($sql);
+    // Verifica si hay disponibilidad para la fecha y hora seleccionadas
+    $sql_disponibilidad = "SELECT * FROM disponibilidad WHERE fecha = '$fecha' AND hora_inicio <= '$hora' AND hora_fin >= '$hora'";
+    $result_disponibilidad = $conn->query($sql_disponibilidad);
 
-    if ($result->num_rows > 0) {
-        echo "<script>swal('Error', 'Ya hay una cita programada para esa fecha y hora.', 'error').then(() => { window.location.href = 'citas.html'; });</script>";
-    } else {
-        // Inserta la cita en la tabla 'citas'
-        $sql = "INSERT INTO citas (nombre_dueno, nombre_mascota, tipo_mascota, raza, contacto, tipo_cita, motivo, fecha, hora) VALUES ('$nombre', '$nombre_mascota', '$tipo', '$raza', '$contacto', '$cita', '$motivo', '$fecha', '$hora')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "<script>swal('Cita solicitada exitosamente!', 'Solicitada por $nombre el $fecha a las $hora, fue almacenada en la base de datos.', 'success').then(() => { window.location.href = '../index.php'; });</script>";
-
+    if ($result_disponibilidad->num_rows > 0) {
+        // Verifica si hay alguna cita programada en la misma hora
+        $sql_citas = "SELECT * FROM citas WHERE fecha = '$fecha' AND hora = '$hora'";
+        $result_citas = $conn->query($sql_citas);
+    
+        if ($result_citas->num_rows > 0) {
+            // Ya hay una cita programada para esa fecha y hora, muestra un mensaje de error
+            echo "<script>swal('Error', 'Ya hay una cita programada para esa fecha y hora.', 'error').then(() => { window.location.href = 'citas.php'; });</script>";
         } else {
-            echo "Error al almacenar la cita: " . $conn->error;
+            // No hay citas programadas en esa hora, inserta la cita en la tabla 'citas'
+            $sql_insert_cita = "INSERT INTO citas (nombre_dueno, nombre_mascota, tipo_mascota, raza, contacto, tipo_cita, motivo, fecha, hora) VALUES ('$nombre', '$nombre_mascota', '$tipo', '$raza', '$contacto', '$cita', '$motivo', '$fecha', '$hora')";
+    
+            if ($conn->query($sql_insert_cita) === TRUE) {
+                echo "<script>swal('Cita solicitada exitosamente!', 'Solicitada por $nombre el $fecha a las $hora, fue almacenada en la base de datos.', 'success').then(() => { window.location.href = '../index.php'; });</script>";
+    
+            } else {
+                echo "Error al almacenar la cita: " . $conn->error;
+            }
         }
+    } else {
+        // No hay disponibilidad para la fecha y hora seleccionadas, muestra un mensaje de error
+        echo "<script>swal('Error', 'No hay disponibilidad para la fecha y hora seleccionadas.', 'error').then(() => { window.location.href = 'citas.php'; });</script>";
     }
 }
 

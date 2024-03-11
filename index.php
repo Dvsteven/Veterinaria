@@ -84,7 +84,7 @@
       <section class="citas">
           <h2>Solicita una Cita Médica</h2>
           <p>Garantizamos un servicio de alta calidad para tu mascota. Agenda una cita con nuestros expertos:</p>
-          <a class="boton-cita" onclick="navigateToSchedule('./citas/citas.html')">Agenda una cita</a>
+          <a class="boton-cita" onclick="navigateToSchedule('./citas/citas.php')">Agenda una cita</a>
       </section>
       <script>
         function cambiarFondo(elemento) {

@@ -50,13 +50,10 @@
             </div>
 
             <div class="enlace">
-                <i class="bx bx-message-square"></i>
-                <span>Citas</span>
-            </div>
-
-            <div class="enlace">
-                <i class="bx bx-cart"></i>
-                <span>Pedidos</span>
+                <a href="citas/citas.html">
+                    <i class="bx bx-calendar"></i>
+                    <span>Citas</span>
+                </a>
             </div>
 
             <div class="enlace">

@@ -130,6 +130,11 @@ body {
     font-size: 25px;
 }
 
+.menu .enlace a{
+    text-decoration: none;
+    color: var(--blanco);
+}
+
 .menu .enlace span {
     opacity: 0;
     transition: opacity .3s ease;

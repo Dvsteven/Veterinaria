@@ -31,8 +31,8 @@
         <div class="main">
             <div class="topbar">
                 <a href="mascota.html">Mascota</a>
-                <a href="../citas/citas.html">Citas</a>
-                <a href="../mascotas/tienda.html">Compras</a>
+                <a href="../citas/citas.php">Citas</a>
+                <a href="../mascotas/tienda.php">Compras</a>
                 <a href="../index.php">Inicio</a>
             </div>
             <div class="row">
@@ -46,9 +46,9 @@
                                 </h3>
                                 <h5>Ir a:</h5>
                                 <a href="../index.php">Inicio</a>
-                                <a href="../servicios/servicios.html">Servicios</a>
-                                <a href="../citas/citas.html">Citas</a>
-                                <a href="../mascotas/mascotas_index.html">Productos</a>
+                                <a href="../servicios/servicios.php">Servicios</a>
+                                <a href="../citas/citas.php">Citas</a>
+                                <a href="../mascotas/mascotas_index.php">Productos</a>
                                 <a href="cambiar.php">Editar Perfil</a>
                             </div>
                         </div>

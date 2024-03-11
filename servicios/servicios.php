@@ -75,7 +75,7 @@
 
         <div id="form1" class="hidden-form">
             <h2>Formulario para Solicitar Servicio 1</h2>
-            <form id="consultaForm" action="procesamiento.php" method="post">
+            <form id="consultaForm" action="procesamiento_forms/servicio1.php" method="post">
                 <label for="nombre">Nombre completo:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
@@ -119,7 +119,7 @@
 
         <div id="form2" class="hidden-form">
             <h2>Formulario para Solicitar Servicio 2</h2>
-            <form id="vacunasForm" action="procesamiento.php" method="post">
+            <form id="vacunasForm" action="procesamiento_forms/servicio2.php" method="post">
                 <label for="nombrePropietario">Nombre completo:</label>
                 <input type="text" id="nombrePropietario" name="nombrePropietario" required>
 
@@ -172,7 +172,7 @@
 
         <div id="form3" class="hidden-form">
             <h2>Formulario para Solicitar Servicio 3</h2>
-            <form id="cirugiasForm" action="procesamiento.php" method="post">
+            <form id="cirugiasForm" action="procesamiento_forms/servicio3.php" method="post">
                 <label for="nombre">Nombre completo del propietario:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
@@ -227,7 +227,7 @@
 
         <div id="form4" class="hidden-form">
             <h2>Formulario para Solicitar Servicio 4</h2>
-            <form id="examenForm" action="procesamiento.php" method="post">
+            <form id="examenForm" action="procesamiento_forms/servicio4.php" method="post">
                 <label for="nombre">Nombre completo del propietario:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
@@ -283,7 +283,7 @@
 
         <div id="form5" class="hidden-form">
             <h2>Formulario para Solicitar Servicio 5</h2>
-            <form id="examenForm" action="procesamiento.php" method="post">
+            <form id="examenForm" action="procesamiento_forms/servicio5.php" method="post">
                 <label for="nombre">Nombre completo del propietario:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
@@ -326,7 +326,7 @@
       <section class="citas">
           <h2>Solicita una Cita Médica</h2>
           <p>Garantizamos un servicio de alta calidad para tu mascota. Agenda una cita con nuestros expertos:</p>
-          <a href="../citas/citas.html" class="boton-cita">Agenda una cita</a>
+          <a href="../citas/citas.php" class="boton-cita">Agenda una cita</a>
       </section>
         <script>
             function showForm(formId) {

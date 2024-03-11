@@ -57,6 +57,13 @@
                 swal('Inicia sesión primero', 'Debes iniciar sesión para acceder a tu perfil', 'warning'); // Si no está iniciado sesión, muestra el Sweet Alert
             <?php endif; ?>
         }
+        function navigateToSchedule(url) {
+            <?php if (isset($_SESSION['nombre']) && isset($_SESSION['apellido'])) : ?>
+                window.location.href = url;
+            <?php else : ?>
+                swal('Inicia sesión primero', 'Debes iniciar sesión para solicitar citas', 'warning');
+            <?php endif; ?>
+        }
     </script>
         <div class="fondo-pet"> </div>
     <!-- <img src="../img/background/huella.png" alt=""> -->
@@ -131,8 +138,8 @@
         <section class="citas">
           <h2>Solicita una Cita Médica</h2>
           <p>Garantizamos un servicio de alta calidad para tu mascota. Agenda una cita con nuestros expertos:</p>
-          <a class="boton-cita" onclick="navigateToSchedule">Agenda una cita</a>
-        </section>
+          <a class="boton-cita" onclick="navigateToSchedule('../citas/citas.php')">Agenda una cita</a>
+      </section>
             <button onclick="scrollToTop()" id="scrollToTopBtn" title="Volver Arriba">↑</button>
         <script>
             // Función para desplazarse suavemente hacia arriba
@@ -180,7 +187,7 @@
             function autoSlide() {
                 changeSlide(1);
             }
-
+        
             // Inicia automáticamente el slider después de 2 segundos y luego cambia cada 5 segundos
             setTimeout(autoSlide, 0);
             setInterval(autoSlide, 3500);
