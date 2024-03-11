@@ -115,7 +115,7 @@
                 <option value="Roedor">Roedor</option>
                 <option value="Otro">Otro</option>
             </select>            
-
+            <br>
             <label for="raza">Raza:</label>
             <input type="text" id="raza" name="raza" required>
 
@@ -130,7 +130,38 @@
                 <option value="Procedimiento_g">Procedimiento Quirurgico</option>
                 <option value="Medicamentos">Medicamentos</option>
             </select>
+            <br>
+            <label for="medico">Médico Disponible:</label>
+            <select id="medico" name="medico" readonly>
+                <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+            </select>
+            <br>
+            <script>
+            // Define la lista de médicos para cada tipo de cita
+            var medicosPorCita = {
+                "Primera Vez": ["Jose Jose"],
+                "Medicina General": ["Santiago Pradilla"],
+                "Seguimiento": ["Santiago Pradilla"],
+                "Procedimiento_g": ["Julian Enrique"],
+                "Medicamentos": ["Juan Esteban"]
+            };
 
+            // Función para actualizar las opciones del select de médicos según el tipo de cita seleccionado
+            document.getElementById('cita').addEventListener('change', function() {
+                var tipoCita = this.value;
+                var selectMedico = document.getElementById('medico');
+                // Limpia las opciones actuales del select de médicos
+                selectMedico.innerHTML = '';
+                // Agrega las opciones correspondientes al tipo de cita seleccionado
+                medicosPorCita[tipoCita].forEach(function(medico) {
+                    var option = document.createElement('option');
+                    option.text = medico;
+                    option.value = medico;
+                    selectMedico.appendChild(option);
+                });
+            });
+            </script>
+            
             <label for="motivo">Motivo:</label>
             <input type="text" id="motivo" name="motivo" required>
 
@@ -141,39 +172,47 @@
             <select id="hora" name="hora" required>
 
             </select>
-
+            <br>
             <script>
-            function obtenerHorasDisponibles() {
-                var fechaSeleccionada = document.getElementById('fecha').value;
+                function obtenerHorasDisponibles() {
+                    var fechaSeleccionada = document.getElementById('fecha').value;
 
-                // Realizar una solicitud al servidor para obtener las horas ocupadas para la fecha seleccionada
-                fetch('hora_cita.php?fecha=' + fechaSeleccionada)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Obtener el elemento select de la hora
-                        var selectHora = document.getElementById('hora');
+                    // Realizar una solicitud al servidor para obtener las horas ocupadas para la fecha seleccionada
+                    fetch('hora_cita.php?fecha=' + fechaSeleccionada)
+                        .then(response => response.json())
+                        .then(data => {
+                            // Imprimir la respuesta en la consola para verificar si se están recibiendo los datos correctamente
+                            console.log('Horas ocupadas recibidas:', data);
 
-                        // Limpiar el select de cualquier opción anterior
-                        selectHora.innerHTML = '';
+                            // Resto del código para procesar las horas disponibles
+                            var selectHora = document.getElementById('hora');
+                            selectHora.innerHTML = '';
+                            var horaInicio = 6;
+                            var horaFin = 19;
 
-                        // Definir el rango de horas disponibles (de 6:00 AM a 7:00 PM)
-                        var horaInicio = 6;
-                        var horaFin = 19;
-
-                        // Generar las opciones de hora en el select
-                        for (var hora = horaInicio; hora <= horaFin; hora++) {
-                            for (var minuto = 0; minuto < 60; minuto += 30) {
-                                var horaString = ('0' + hora).slice(-2) + ':' + ('0' + minuto).slice(-2);
-                                if (!data.includes(horaString)) {
-                                    var option = new Option(horaString, horaString);
-                                    selectHora.appendChild(option);
+                            for (var hora = horaInicio; hora <= horaFin; hora++) {
+                                for (var minuto = 0; minuto < 60; minuto += 30) {
+                                    var horaString = ('0' + hora).slice(-2) + ':' + ('0' + minuto).slice(-2);
+                                    if (!data.includes(horaString)) {
+                                        var option = new Option(horaString, horaString);
+                                        selectHora.appendChild(option);
+                                    }
                                 }
                             }
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
+
+                            // Ocultar las horas ocupadas de la lista de selección de horas
+                            data.forEach(horaOcupada => {
+                                var optionOcupada = document.querySelector('option[value="' + horaOcupada + '"]');
+                                if (optionOcupada) {
+                                    optionOcupada.style.display = 'none';
+                                }
+                            });
+                        })
+                        .catch(error => console.error('Error:', error));
+                }
+
             </script>
+
             <button type="submit">Solicitar Cita</button>
             <a href="../index.php">Regresar a la pagina principal</a>
         </form>

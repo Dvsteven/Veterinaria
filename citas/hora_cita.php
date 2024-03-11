@@ -30,9 +30,8 @@
         }
     }
 
-    // Devolver los datos como JSON
+    // Devolver las horas ocupadas como JSON
     echo json_encode($horasOcupadas);
-
     // Cerrar la conexión a la base de datos
     $conn->close();
 ?>
