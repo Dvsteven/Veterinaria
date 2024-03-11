@@ -135,11 +135,45 @@
             <input type="text" id="motivo" name="motivo" required>
 
             <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required>
+            <input type="date" id="fecha" name="fecha" required onchange="obtenerHorasDisponibles()">
 
             <label for="hora">Hora:</label>
-            <input type="time" id="hora" name="hora" required>
+            <select id="hora" name="hora" required>
 
+            </select>
+
+            <script>
+            function obtenerHorasDisponibles() {
+                var fechaSeleccionada = document.getElementById('fecha').value;
+
+                // Realizar una solicitud al servidor para obtener las horas ocupadas para la fecha seleccionada
+                fetch('hora_cita.php?fecha=' + fechaSeleccionada)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Obtener el elemento select de la hora
+                        var selectHora = document.getElementById('hora');
+
+                        // Limpiar el select de cualquier opción anterior
+                        selectHora.innerHTML = '';
+
+                        // Definir el rango de horas disponibles (de 6:00 AM a 7:00 PM)
+                        var horaInicio = 6;
+                        var horaFin = 19;
+
+                        // Generar las opciones de hora en el select
+                        for (var hora = horaInicio; hora <= horaFin; hora++) {
+                            for (var minuto = 0; minuto < 60; minuto += 30) {
+                                var horaString = ('0' + hora).slice(-2) + ':' + ('0' + minuto).slice(-2);
+                                if (!data.includes(horaString)) {
+                                    var option = new Option(horaString, horaString);
+                                    selectHora.appendChild(option);
+                                }
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+            </script>
             <button type="submit">Solicitar Cita</button>
             <a href="../index.php">Regresar a la pagina principal</a>
         </form>
