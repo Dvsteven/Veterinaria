@@ -241,7 +241,8 @@ tbody tr:nth-child(odd) {
 
 /*Estilos botones de editar y eliminar*/
 .editar-btn,
-.cancelar-btn {
+.cancelar-btn,
+.culminada-btn {
     padding: 5px 10px;
     margin-right: 5px;
     border: none;
@@ -260,10 +261,19 @@ tbody tr:nth-child(odd) {
     color: #fff;
 }
 
+.culminada-btn {
+    background-color: #eff146;
+    color: #fff;
+}
+
 .editar-btn:hover {
     background-color: #0056b3;
 }
 
 .cancelar-btn:hover {
     background-color: #881505;
+}
+
+.culminada-btn:hover {
+    background-color: #6d7419;
 }

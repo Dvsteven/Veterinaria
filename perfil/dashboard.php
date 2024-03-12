@@ -57,8 +57,10 @@
             </div>
 
             <div class="enlace">
-                <i class="bx bx-cog"></i>
-                <span>Configuración</span>
+                <a href="../index.php">
+                    <i class="bx bx-home"></i>
+                    <span>Veterinaria</span>
+                </a>
             </div>
         </div>
     </div>
@@ -152,6 +154,7 @@
                                     echo "<td>";
                                     echo "<button class='editar-btn' onclick='aceptarCita(" . $row['id'] . ")'>Aceptar</button>";
                                     echo "<button class='cancelar-btn' onclick='cancelarCita(" . $row['id'] . ")'>Cancelar</button>";
+                                    echo "<button class='culminada-btn' onclick='marcarConsumida(" . $row['id'] . ")'>Culminar</button>";
                                     echo "</td>";
                                     echo "</tr>";
                                 }
@@ -200,6 +203,25 @@
                                 xhttp.send();
                             }
 
+                            function marcarConsumida(id) {
+                                // Hacer una solicitud AJAX para marcar la cita como consumida
+                                var xhttp = new XMLHttpRequest();
+                                xhttp.onreadystatechange = function() {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        // Mostrar SweetAlert con la respuesta del servidor
+                                        swal({
+                                            title: 'Cita Consumida',
+                                            text: 'La cita se marcado como "Culminada" correctamente',
+                                            icon: 'success'
+                                        }).then(() => {
+                                            // Redirigir a la página principal
+                                            window.location.href = 'dashboard.php';
+                                        });
+                                    }
+                                };
+                                xhttp.open('GET', 'acciones/cita_realizada.php?id=' + id, true);
+                                xhttp.send();
+                            }
                         </script>
                     </tbody>
                 </table>

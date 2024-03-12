@@ -8,96 +8,96 @@
     <link rel="shortcut icon" href="../login/img/pet.png">
 </head>
 <body>
-<div class="calendar-container">
-        <h2>Calendario de Disponibilidad</h2>
-        <h4>Horario de atencion General:</h4>
-        <h6>6:00 AM - 7:00 PM</h6>
-        <table class="calendario">
-            <thead>
-                <tr>
-                    <th>Lun</th>
-                    <th>Mar</th>
-                    <th>Mié</th>
-                    <th>Jue</th>
-                    <th>Vie</th>
-                    <th>Sáb</th>
-                    <th>Dom</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                // Obtener el primer día del mes actual
-                $primerDiaMes = strtotime(date('Y-m-01'));
+    <div class="calendar-container">
+            <h2>Calendario de Disponibilidad</h2>
+            <h4>Horario de atencion General:</h4>
+            <h6>6:00 AM - 7:00 PM</h6>
+            <table class="calendario">
+                <thead>
+                    <tr>
+                        <th>Lun</th>
+                        <th>Mar</th>
+                        <th>Mié</th>
+                        <th>Jue</th>
+                        <th>Vie</th>
+                        <th>Sáb</th>
+                        <th>Dom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        // Obtener el primer día del mes actual
+                        $primerDiaMes = strtotime(date('Y-m-01'));
 
-                // Obtener el último día del mes actual
-                $ultimoDiaMes = strtotime(date('Y-m-t'));
+                        // Obtener el último día del mes actual
+                        $ultimoDiaMes = strtotime(date('Y-m-t'));
 
-                // Conexión a la base de datos
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $dbname = "veterinaria";
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                
-                // Verificar la conexión
-                if ($conn->connect_error) {
-                    die("Error de conexión a la base de datos: " . $conn->connect_error);
-                }
+                        // Conexión a la base de datos
+                        $servername = "localhost";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "veterinaria";
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+                        
+                        // Verificar la conexión
+                        if ($conn->connect_error) {
+                            die("Error de conexión a la base de datos: " . $conn->connect_error);
+                        }
 
-                // Consulta para obtener las fechas disponibles
-                $sql = "SELECT DISTINCT fecha FROM disponibilidad";
-                $result = $conn->query($sql);
+                        // Consulta para obtener las fechas disponibles
+                        $sql = "SELECT DISTINCT fecha FROM disponibilidad";
+                        $result = $conn->query($sql);
 
-                // Inicializar la variable para el día actual
-                $diaActual = $primerDiaMes;
+                        // Inicializar la variable para el día actual
+                        $diaActual = $primerDiaMes;
 
-                // Iterar sobre cada semana del mes
-                while ($diaActual <= $ultimoDiaMes) {
-                    echo "<tr>";
+                        // Iterar sobre cada semana del mes
+                        while ($diaActual <= $ultimoDiaMes) {
+                            echo "<tr>";
 
-                    // Iterar sobre los días de la semana (Lun a Dom)
-                    for ($i = 1; $i <= 7; $i++) {
-                        // Construir la fecha del día actual
-                        $fechaActual = date('Y-m-d', $diaActual);
+                            // Iterar sobre los días de la semana (Lun a Dom)
+                            for ($i = 1; $i <= 7; $i++) {
+                                // Construir la fecha del día actual
+                                $fechaActual = date('Y-m-d', $diaActual);
 
-                        // Verificar si la fecha está dentro del mes actual
-                        if (date('Y-m', $diaActual) == date('Y-m', $primerDiaMes)) {
-                            // Verificar si la fecha actual está disponible
-                            $esFechaDisponible = false;
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    if ($row["fecha"] == $fechaActual) {
-                                        $esFechaDisponible = true;
-                                        break;
+                                // Verificar si la fecha está dentro del mes actual
+                                if (date('Y-m', $diaActual) == date('Y-m', $primerDiaMes)) {
+                                    // Verificar si la fecha actual está disponible
+                                    $esFechaDisponible = false;
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            if ($row["fecha"] == $fechaActual) {
+                                                $esFechaDisponible = true;
+                                                break;
+                                            }
+                                        }
+                                        // Reiniciar el puntero de resultados
+                                        $result->data_seek(0);
                                     }
+
+                                    // Agregar la clase 'fecha-disponible' si la fecha está disponible
+                                    $claseFecha = $esFechaDisponible ? 'fecha-disponible' : '';
+
+                                    // Agregar el día actual al calendario
+                                    echo "<td class='$claseFecha'>" . date('j', $diaActual) . "</td>";
+
+                                    // Avanzar al siguiente día
+                                    $diaActual = strtotime('+1 day', $diaActual);
+                                } else {
+                                    // Agregar una celda vacía para los días fuera del mes
+                                    echo "<td></td>";
                                 }
-                                // Reiniciar el puntero de resultados
-                                $result->data_seek(0);
                             }
 
-                            // Agregar la clase 'fecha-disponible' si la fecha está disponible
-                            $claseFecha = $esFechaDisponible ? 'fecha-disponible' : '';
-
-                            // Agregar el día actual al calendario
-                            echo "<td class='$claseFecha'>" . date('j', $diaActual) . "</td>";
-
-                            // Avanzar al siguiente día
-                            $diaActual = strtotime('+1 day', $diaActual);
-                        } else {
-                            // Agregar una celda vacía para los días fuera del mes
-                            echo "<td></td>";
+                            echo "</tr>";
                         }
-                    }
 
-                    echo "</tr>";
-                }
-
-                // Cerrar la conexión a la base de datos
-                $conn->close();
-                ?>
-            </tbody>
-        </table>
-    </div>
+                        // Cerrar la conexión a la base de datos
+                        $conn->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
     <div class="container">
         <h2>Solicitar una Cita</h2>
         <form action="procesar_cita.php" method="post">
@@ -166,52 +166,54 @@
             <input type="text" id="motivo" name="motivo" required>
 
             <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required onchange="obtenerHorasDisponibles()">
+            <input type="date" id="fecha" name="fecha" min="<?php echo date('Y-m-d'); ?>" required onchange="obtenerHorasDisponibles()">
 
             <label for="hora">Hora:</label>
-            <select id="hora" name="hora" required>
+            <select id="hora" name="hora" title="Rojo: hora cita no disponible -- Verde: Hora cita Disponible"required>
 
             </select>
             <br>
             <script>
-                function obtenerHorasDisponibles() {
-                    var fechaSeleccionada = document.getElementById('fecha').value;
+                    function obtenerHorasDisponibles() {
+                        var fechaSeleccionada = document.getElementById('fecha').value;
 
-                    // Realizar una solicitud al servidor para obtener las horas ocupadas para la fecha seleccionada
-                    fetch('hora_cita.php?fecha=' + fechaSeleccionada)
-                        .then(response => response.json())
-                        .then(data => {
-                            // Imprimir la respuesta en la consola para verificar si se están recibiendo los datos correctamente
-                            console.log('Horas ocupadas recibidas:', data);
+                        // Realizar una solicitud al servidor para obtener todas las horas ocupadas para la fecha seleccionada
+                        fetch('hora_cita.php?fecha=' + fechaSeleccionada)
+                            .then(response => response.json())
+                            .then(data => {
+                                // Obtener el elemento select de la hora
+                                var selectHora = document.getElementById('hora');
+                                console.log('Horas ocupadas recibidas:', data);
 
-                            // Resto del código para procesar las horas disponibles
-                            var selectHora = document.getElementById('hora');
-                            selectHora.innerHTML = '';
-                            var horaInicio = 6;
-                            var horaFin = 19;
+                                // Limpiar el select de cualquier opción anterior
+                                selectHora.innerHTML = '';
 
-                            for (var hora = horaInicio; hora <= horaFin; hora++) {
-                                for (var minuto = 0; minuto < 60; minuto += 30) {
-                                    var horaString = ('0' + hora).slice(-2) + ':' + ('0' + minuto).slice(-2);
-                                    if (!data.includes(horaString)) {
+                                // Definir el rango de horas disponibles (de 6:00 AM a 7:00 PM en formato de 24 horas)
+                                var horaInicio = 6;
+                                var horaFin = 19;
+
+                                // Generar las opciones de hora en formato de 24 horas
+                                for (var hora = horaInicio; hora <= horaFin; hora++) {
+                                    for (var minuto = 0; minuto < 60; minuto += 30) {
+                                        var horaString = ('0' + hora).slice(-2) + ':' + ('0' + minuto).slice(-2);
+
                                         var option = new Option(horaString, horaString);
+
+                                        // Verificar si la hora está ocupada y asignar color correspondiente
+                                        if (data.includes(horaString)) {
+                                            option.style.display = 'none';
+                                        } else {
+                                            option.style.color = 'green'; // Hora disponible
+                                        }
+
+                                        // Agregar la opción al select
                                         selectHora.appendChild(option);
                                     }
                                 }
-                            }
-
-                            // Ocultar las horas ocupadas de la lista de selección de horas
-                            data.forEach(horaOcupada => {
-                                var optionOcupada = document.querySelector('option[value="' + horaOcupada + '"]');
-                                if (optionOcupada) {
-                                    optionOcupada.style.display = 'none';
-                                }
-                            });
-                        })
-                        .catch(error => console.error('Error:', error));
-                }
-
-            </script>
+                            })
+                            .catch(error => console.error('Error:', error));
+                    }
+                </script>
 
             <button type="submit">Solicitar Cita</button>
             <a href="../index.php">Regresar a la pagina principal</a>
